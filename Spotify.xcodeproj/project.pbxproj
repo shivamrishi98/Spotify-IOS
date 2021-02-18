@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9603CB0925DCE2B800C327FB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9603CB0825DCE2B800C327FB /* Extensions.swift */; };
+		9647D1C425DE3B8800004710 /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9647D1C325DE3B8800004710 /* AuthResponse.swift */; };
 		96999FFD25DC1BF3002D086A /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96999FFC25DC1BF3002D086A /* TabBarViewController.swift */; };
 		9699A00025DC1C67002D086A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96999FFF25DC1C67002D086A /* SearchViewController.swift */; };
 		9699A00425DC1CBA002D086A /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9699A00325DC1CBA002D086A /* LibraryViewController.swift */; };
@@ -34,6 +35,7 @@
 
 /* Begin PBXFileReference section */
 		9603CB0825DCE2B800C327FB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		9647D1C325DE3B8800004710 /* AuthResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		96999FFC25DC1BF3002D086A /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		96999FFF25DC1C67002D086A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9699A00325DC1CBA002D086A /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				9699A02B25DC1F8F002D086A /* AudioTrack.swift */,
 				9699A02E25DC1F97002D086A /* Artist.swift */,
 				9699A03125DC1F9D002D086A /* UserProfile.swift */,
+				9647D1C325DE3B8800004710 /* AuthResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 				9699A01425DC1E73002D086A /* ProfileViewController.swift in Sources */,
 				96999FFD25DC1BF3002D086A /* TabBarViewController.swift in Sources */,
 				9699A02625DC1F44002D086A /* HapticsManager.swift in Sources */,
+				9647D1C425DE3B8800004710 /* AuthResponse.swift in Sources */,
 				9699A02C25DC1F8F002D086A /* AudioTrack.swift in Sources */,
 				96C1B18225DC110900810DA1 /* HomeViewController.swift in Sources */,
 				9699A02325DC1F1E002D086A /* ApiManager.swift in Sources */,
