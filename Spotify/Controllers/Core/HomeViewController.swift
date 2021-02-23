@@ -60,6 +60,77 @@ class HomeViewController: UIViewController {
         collectionView.backgroundColor = . systemBackground
     }
     
+    private func fetchData() {
+        // New Releases
+        // Featured Playlists
+        // Recommended Tracks
+       
+        ApiManager.shared.getRecommendedGenres { result in
+           
+            switch result {
+            case .success(let model):
+                
+                let genres = model.genres
+                var seeds = Set<String>()
+                
+                while seeds.count < 4 {
+                    if let random = genres.randomElement() {
+                        seeds.insert(random)
+                    }
+                }
+            
+                ApiManager.shared.getRecommendations(genres: seeds) { result in
+                   
+                }
+                
+            case .failure(let error):
+                break
+            }
+            
+            
+        }
+    }
+    
+    @objc private func didTapSettings() {
+        let vc = SettingsViewController()
+        vc.title = "Settings"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+
+
+}
+
+extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+       
+        switch indexPath.section {
+        
+        case 0:
+            cell.backgroundColor = .systemGreen
+        case 1:
+            cell.backgroundColor = .systemPink
+        case 2:
+            cell.backgroundColor = .systemBlue
+        default:
+            cell.backgroundColor = .black
+        
+        }
+        
+        return cell
+    }
+    
     private static func createSectionLayout(section:Int) -> NSCollectionLayoutSection {
         
         switch section {
@@ -170,78 +241,5 @@ class HomeViewController: UIViewController {
         }
             
     }
-    
-    
-    private func fetchData() {
-        // New Releases
-        // Featured Playlists
-        // Recommended Tracks
-       
-        ApiManager.shared.getRecommendedGenres { result in
-           
-            switch result {
-            case .success(let model):
-                
-                let genres = model.genres
-                var seeds = Set<String>()
-                
-                while seeds.count < 4 {
-                    if let random = genres.randomElement() {
-                        seeds.insert(random)
-                    }
-                }
-            
-                ApiManager.shared.getRecommendations(genres: seeds) { result in
-                   
-                }
-                
-            case .failure(let error):
-                break
-            }
-            
-            
-        }
-    }
-    
-    @objc private func didTapSettings() {
-        let vc = SettingsViewController()
-        vc.title = "Settings"
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-
-
-}
-
-extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource {
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-       
-        switch indexPath.section {
-        
-        case 0:
-            cell.backgroundColor = .systemGreen
-        case 1:
-            cell.backgroundColor = .systemPink
-        case 2:
-            cell.backgroundColor = .systemBlue
-        default:
-            cell.backgroundColor = .black
-        
-        }
-        
-        return cell
-    }
-    
     
 }
