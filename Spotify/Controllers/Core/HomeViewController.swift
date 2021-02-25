@@ -9,8 +9,8 @@ import UIKit
 
 enum BrowseSectionType {
     case newReleases(viewModels:[NewReleasesCellViewModel]) // 1
-    case featuredPlaylists(viewModels:[NewReleasesCellViewModel]) // 2
-    case recommendedTracks(viewModels:[NewReleasesCellViewModel]) // 3
+    case featuredPlaylists(viewModels:[FeaturedPlaylistCellViewModel]) // 2
+    case recommendedTracks(viewModels:[RecommendedTrackCellViewModel]) // 3
 }
 
 
@@ -172,8 +172,21 @@ class HomeViewController: UIViewController {
                 artistName: $0.artists.first?.name ?? "-"
             )
         }))
-        sections.append(.featuredPlaylists(viewModels: []))
-        sections.append(.recommendedTracks(viewModels: []))
+        
+        sections.append(.featuredPlaylists(viewModels: playlists.compactMap {
+            return FeaturedPlaylistCellViewModel(name: $0.name,
+                                                 artworkUrl: URL(string:  $0.images.first?.url ?? ""),
+                                                 creatorName: $0.owner.display_name)
+        }))
+        
+        
+        sections.append(.recommendedTracks(viewModels: tracks.compactMap {
+            return RecommendedTrackCellViewModel(name: $0.name,
+                                                 artistName: $0.artists.first?.name ?? "",
+                                                 artworkUrl: URL(string: $0.album.images.first?.url ?? ""))
+        }))
+        
+        
         collectionView.reloadData()
         
     }
@@ -235,7 +248,7 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
                 return UICollectionViewCell()
             }
             let viewModel = viewModels[indexPath.row]
-            cell.backgroundColor = .systemGreen
+            cell.configure(with: viewModel)
             return cell
 
         case .recommendedTracks(let viewModels):
@@ -246,7 +259,7 @@ extension HomeViewController:UICollectionViewDelegate,UICollectionViewDataSource
                 return UICollectionViewCell()
             }
             let viewModel = viewModels[indexPath.row]
-            cell.backgroundColor = .systemOrange
+            cell.configure(with: viewModel)
             return cell
 
         }
