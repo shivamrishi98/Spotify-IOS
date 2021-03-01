@@ -51,6 +51,7 @@
 		96F754DD25E8B06C00C2E52D /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F754DC25E8B06C00C2E52D /* AlbumViewController.swift */; };
 		96F754E025E8B44800C2E52D /* AlbumDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F754DF25E8B44800C2E52D /* AlbumDetailsResponse.swift */; };
 		96F754E325E8B6EA00C2E52D /* PlaylistDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F754E225E8B6EA00C2E52D /* PlaylistDetailsResponse.swift */; };
+		96FD67C125ECAB4B0088D039 /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96FD67C025ECAB4B0088D039 /* GenreCollectionViewCell.swift */; };
 		FD92A1527C66FB7112178AB2 /* Pods_Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AF7DDE4415160CFA8E4DAAB /* Pods_Spotify.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,7 @@
 		96F754DC25E8B06C00C2E52D /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
 		96F754DF25E8B44800C2E52D /* AlbumDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsResponse.swift; sourceTree = "<group>"; };
 		96F754E225E8B6EA00C2E52D /* PlaylistDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailsResponse.swift; sourceTree = "<group>"; };
+		96FD67C025ECAB4B0088D039 /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +203,7 @@
 				96DCC64B25EA7A2A006A5489 /* PlaylistHeaderCollectionReusableView.swift */,
 				96211FF225EB8FD400F2FF01 /* TitleHeaderCollectionReusableView.swift */,
 				96211FF525EB94D500F2FF01 /* AlbumTrackCollectionViewCell.swift */,
+				96FD67C025ECAB4B0088D039 /* GenreCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 				96999FFD25DC1BF3002D086A /* TabBarViewController.swift in Sources */,
 				96C895B125E4D4680071A2E2 /* RecommendedTrackCollectionViewCell.swift in Sources */,
 				9699A02625DC1F44002D086A /* HapticsManager.swift in Sources */,
+				96FD67C125ECAB4B0088D039 /* GenreCollectionViewCell.swift in Sources */,
 				9647D1C425DE3B8800004710 /* AuthResponse.swift in Sources */,
 				96DAF03525E22F3300E20D75 /* NewReleasesResponse.swift in Sources */,
 				96211FF625EB94D500F2FF01 /* AlbumTrackCollectionViewCell.swift in Sources */,
