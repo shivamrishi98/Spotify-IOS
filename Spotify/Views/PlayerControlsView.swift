@@ -12,9 +12,17 @@ protocol PlayerControlsViewDelegate:AnyObject {
     func playerControlsViewDidTapPlayPauseButton(_ playerControlsView: PlayerControlsView)
     func playerControlsViewDidTapForwardButton(_ playerControlsView: PlayerControlsView)
     func playerControlsViewDidTapBackwardsButton(_ playerControlsView: PlayerControlsView)
+    func playerControlsView(_ playerControlsView: PlayerControlsView, didSlideSlider value:Float)
+}
+
+struct PlayerControlsViewViewModel {
+    let title:String?
+    let subTitle:String?
 }
 
 final class PlayerControlsView:UIView {
+    
+    private var isPlaying:Bool = true
     
     weak var delegate:PlayerControlsViewDelegate?
     
@@ -95,6 +103,10 @@ final class PlayerControlsView:UIView {
                              action: #selector(didTapPlayPause),
                              for: .touchUpInside)
         
+        volumeSlider.addTarget(self,
+                             action: #selector(didSlideSlider(_:)),
+                             for: .valueChanged)
+        
         clipsToBounds = true
     }
     
@@ -111,7 +123,23 @@ final class PlayerControlsView:UIView {
     }
     
     @objc private func didTapPlayPause(){
+        self.isPlaying = !isPlaying
         delegate?.playerControlsViewDidTapPlayPauseButton(self)
+        
+        // update icon
+        let play = UIImage(
+            systemName: "play.fill",
+            withConfiguration: UIImage.SymbolConfiguration.init(pointSize: 34, weight: .bold))
+        let pause = UIImage(
+            systemName: "pause",
+            withConfiguration: UIImage.SymbolConfiguration.init(pointSize: 34, weight: .bold))
+        playPauseButton.setImage(isPlaying ? pause : play, for: .normal)
+    }
+    
+    @objc private func didSlideSlider(_ slider:UISlider){
+        let value = slider.value
+        delegate?.playerControlsView(self,
+                                     didSlideSlider: value)
     }
     
     override func layoutSubviews() {
@@ -147,6 +175,11 @@ final class PlayerControlsView:UIView {
                                   width: buttonSize,
                                   height: buttonSize)
         
+    }
+    
+    func configure(with viewModel:PlayerControlsViewViewModel) {
+        nameLabel.text = viewModel.title
+        subtitleLabel.text = viewModel.subTitle
     }
     
 }
