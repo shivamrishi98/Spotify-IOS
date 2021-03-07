@@ -22,25 +22,21 @@ final class PlaybackPresenter {
     private var track:AudioTrack?
     private var tracks = [AudioTrack]()
     
+    private var index = 0
+    
     var currentTrack:AudioTrack? {
         if let track = track,
            tracks.isEmpty {
             return track
         } else if let player = self.playerQueue,
                   !tracks.isEmpty {
-            let item = player.currentItem
-            let items = player.items()
-            guard let index = items.firstIndex(where: {
-                $0 == item
-            }) else {
-                return nil
-            }
-            
             return tracks[index]
         }
         
         return nil
     }
+    
+    var playerVC:PlayerViewController?
     
     var player:AVPlayer?
     var playerQueue:AVQueuePlayer?
@@ -62,7 +58,7 @@ final class PlaybackPresenter {
             UINavigationController(rootViewController: vc), animated: true) { [weak self] in
             self?.player?.play()
         }
-        
+        self.playerVC = vc
     }
     
      func startPlayback(from viewController:UIViewController,
@@ -87,6 +83,7 @@ final class PlaybackPresenter {
             UINavigationController(rootViewController: vc), animated: true) { [weak self] in
             self?.playerQueue?.play()
         }
+        self.playerVC = vc
      }
     
 }
@@ -115,6 +112,8 @@ extension PlaybackPresenter: PlayerViewControllerDelegate {
             player?.pause()
         } else if let player = playerQueue {
             player.advanceToNextItem()
+            index += 1
+            playerVC?.refreshUI()
         }
     }
     
@@ -127,9 +126,10 @@ extension PlaybackPresenter: PlayerViewControllerDelegate {
             
             playerQueue?.pause()
             playerQueue?.removeAllItems()
-            playerQueue = AVQueuePlayer(items: [firstItem])
-            playerQueue?.play()
+            playerQueue?.pause()
             playerQueue?.volume = 0.5
+            
+            playerVC?.dismiss(animated: true, completion: nil)
         }
     }
     
