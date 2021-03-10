@@ -58,13 +58,66 @@ class HomeViewController: UIViewController {
         configureCollectionView()
         view.addSubview(spinner)
         fetchData()
-        
+        addLongPressGesture()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         collectionView.frame = view.bounds
+        
+    }
+    
+    private func addLongPressGesture() {
+        let gesture = UILongPressGestureRecognizer(target: self,
+                                                   action: #selector(didLongPress(_:)))
+        collectionView.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func didLongPress(_ gesture:UILongPressGestureRecognizer) {
+        
+        guard gesture.state == .began else {
+            return
+        }
+        
+        let touchPoint = gesture.location(in: collectionView)
+        
+        guard let indexPath = collectionView.indexPathForItem(at: touchPoint),
+              indexPath.section == 2 else {
+            return
+        }
+        
+        let model = tracks[indexPath.row]
+        
+        let actionSheet = UIAlertController(title: model.name,
+                                            message: "Would you like to add this to a playlist?", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(
+            UIAlertAction(title: "Add to Playlist",
+                          style: .default,
+                          handler: { [weak self] _ in
+                            DispatchQueue.main.async {
+                                let vc = LibraryPlaylistsViewController()
+                                vc.selectionHandler = { playlist in
+                                    ApiManager.shared.addTrackToPlaylist(track: model,
+                                                                         playlist: playlist) { success in
+                                        if success {
+                                            print("Added to playlist")
+                                        }
+                                    }
+                                }
+                                vc.title = "Select Playlist"
+                                self?.present(
+                                    UINavigationController(rootViewController: vc)
+                                    , animated: true)
+                            }
+                          }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel",
+                                            style: .cancel,
+                                            handler: nil))
+        
+        present(actionSheet, animated: true)
         
     }
     
