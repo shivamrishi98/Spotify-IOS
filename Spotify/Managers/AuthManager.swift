@@ -13,11 +13,11 @@ final class AuthManager {
     private var refreshingToken = false
     
     struct Constants {
-        static let clientID = "8d34c9c9d16c447981b11948ace1412e"
-        static let clientSecret = "69ee2b0a762e406fa1e846917560f2de"
-        static let tokenAPIURL = "https://accounts.spotify.com/api/token"
-        static let redirectUri = "Https://www.iosacademy.io"
-        static let scopes = "user-read-private%20playlist-modify-public%20playlist-read-private%20playlist-modify-private%20user-follow-read%20user-library-modify%20user-library-read%20user-read-email"
+        static let clientID = kCLIENTID
+        static let clientSecret = kCLIENTSECRET
+        static let tokenAPIURL = kTOKENAPIURL
+        static let redirectUri = kREDIRECTURI
+        static let scopes = kSCOPES
     }
     
     
